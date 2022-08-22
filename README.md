@@ -1,6 +1,6 @@
 # Elmedeno
 A middleware for secure Deno web applications
-Elmedeno is a fully customizable security middleware for the major Deno web frameworks. Elmedeno is based totally on code from the [Snelm](https://www.npmjs.com/package/helmet) middleware for Deno and conseguentially from [helmet](https://www.npmjs.com/package/helmet) middleware for NodeJS. Elmedeno currently has built in support and examples for the following Deno web frameworks:
+Elmedeno is a fully customizable security middleware for the major Deno web frameworks. Elmedeno is based totally on code from the [Snelm](https://www.npmjs.com/package/helmet) middleware for Deno and conseguentially from the [Helmet](https://www.npmjs.com/package/helmet) middleware for NodeJS. Elmedeno currently has built in support and examples for the following Deno web frameworks:
 
  * **[Oak](https://deno.land/x/oak)** 
  * **[ABC](https://deno.land/x/abc)** 
@@ -9,7 +9,7 @@ Elmedeno is a fully customizable security middleware for the major Deno web fram
  * **[Aqua](https://deno.land/x/aqua)** 
  * **[Attain](https://deno.land/x/attain)** 
  * **[Fresh](https://deno.land/x/fresh)** 
- # More coming soon...
+ #### More coming soon...
 
 ## Basic Usage
 
