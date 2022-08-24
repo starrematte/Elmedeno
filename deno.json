@@ -1,0 +1,22 @@
+{
+  "tasks": {
+    "test": "deno test --allow-all --unstable --fail-fast ./tests/*.ts"
+  },
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": [
+      "dom",
+      "deno.ns",
+      "deno.unstable"
+    ]
+  },
+  "importMap": "./import_map.json",
+  "test": {
+    "files": {
+      "include": [
+        "./tests/"
+      ]
+    }
+  }
+}
