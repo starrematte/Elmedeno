@@ -1,12 +1,12 @@
 <p align="center">
-  <img height="100%" width="100%" src="https://github.com/starrematte/elmedeno/raw/main/.github/logo_1.png" alt="A Deno with little helmet, so Elmedeno"></a>
-  <h1 align="center">Elmedeno</h1>
+  <img height="50%" width="50%" src="https://github.com/starrematte/elmedeno/raw/main/.github/logo_1.png" alt="A Deno with little helmet, so Elmedeno"></a>
+  <h1 align="center">Elmedeno :rescue_worker_helmet: :sauropod:</h1>
 </p>
 <p align="center">
    <a href="https://github.com/starrematte/elmedeno/tags/"><img src="https://img.shields.io/github/v/tag/starrematte/elmedeno" alt="Current version" /></a>
    <!-- <img src="https://github.com/starrematte/elmedeno/workflows/Test/badge.svg" alt="Current test status" /> -->
    <!-- <a href="https://doc.deno.land/https/deno.land/x/elmedeno/mod.ts"><img src="https://doc.deno.land/badge.svg" alt="Elmedeno docs" /></a> -->
-   <a href="http://makeapullrequest.com">
+   <a href="http://makeapullrequest.com" hidden>
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs are welcome to anyone" />
    </a>
    <!-- <a href="https://github.com/starrematte/elmedeno/issues/"><img src="https://img.shields.io/github/issues/starrematte/elmedeno" alt="Elmedeno issues" /></a> -->
@@ -43,7 +43,7 @@ the following Deno web frameworks:
 
 ## Basic Usage
 
-Elmedeno is very easy to use. You simply import Elmedeno, instanciate it with
+Elmedeno is very easy to use :tada:. You simply import Elmedeno, instanciate it with
 the framework you want to use and then pass the **request** and **response**
 objects from your chosen framework into the Elmedeno function. Elmedeno will
 return the original response object with various headers set to improve security
@@ -59,7 +59,7 @@ import { Elmedeno } from "https://deno.land/x/elmedeno/mod.ts";
 // Configuring Elmedeno for the Fresh framework
 const elmedeno = new Elmedeno("fresh");
 
-// Using Elmedeno Middleware for Fresh :tada:
+// Using Elmedeno Middleware for Fresh
 export async function handler(req: Request, ctx: MiddlewareHandlerContext) {
   const res: Response = await elmedeno.protect(req, await ctx.next());
   return res;
