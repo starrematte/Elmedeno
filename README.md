@@ -13,7 +13,7 @@
    <img src="https://img.shields.io/github/stars/starrematte/elmedeno" alt="Elmedeno stars" />
    <img src="https://img.shields.io/github/forks/starrematte/elmedeno" alt="Elmedeno forks" />
    <img src="https://img.shields.io/github/license/starrematte/elmedeno" alt="Elmedeno license" />
-   <a href="https://GitHub.com/mattestarre/elmedeno/graphs/commit-activity">
+   <a href="https://github.com/starrematte/elmedeno/graphs/commit-activity">
     <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Elmedeno is maintained" />
    </a>
 </p>
