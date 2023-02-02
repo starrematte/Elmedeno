@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "test": "deno test --allow-all --unstable --fail-fast ./tests/*.ts"
+    "testAll": "deno test --allow-all --unstable --fail-fast ./tests/abc.ts ./tests/alosaur.ts ./tests/aqua.ts ./tests/attain.ts ./tests/fresh.ts ./tests/oak.ts ./tests/opine.ts ./tests/pogo.ts",
+    "test": "deno test --allow-all --unstable --fail-fast ./tests/tests.ts"
   },
   "compilerOptions": {
     "experimentalDecorators": true,

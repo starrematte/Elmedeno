@@ -1,47 +1,51 @@
 import { assertEquals } from 'https://deno.land/std/testing/asserts.ts';
-import { superdeno } from "https://deno.land/x/superdeno/mod.ts"
 import Aqua from "https://deno.land/x/aqua/deploy.ts";
 import { Elmedeno } from "../mod.ts";
-import { killPort } from "https://x.nest.land/kill-port@1.0.1/mod.ts";
-import { delay } from "https://deno.land/std@0.137.0/async/delay.ts";
 
-async function sendMockRequest(req: Request): Promise<Response> {
-  return await new Promise((resolve) => {
-    app._internal.mockRequest({
-      request: req,
-      respondWith: async (res) => {
-        resolve(await res);
-      },
+export default (() => {
+  return new Promise((resolve, reject) => {
+
+    async function sendMockRequest(req: Request): Promise<Response> {
+      return await new Promise((resolve) => {
+        app._internal.mockRequest({
+          request: req,
+          respondWith: async (res) => {
+            resolve(await res);
+          },
+        });
+      });
+    }
+
+    const app = new Aqua();
+
+    // Configuring Elmedeno for Aqua
+    const elmedeno = new Elmedeno("aqua");
+
+    // Elmedeno Middleware for Aqua
+    app.register(async (request, response) => {
+      response = await elmedeno.protect(request, response);
+      return response;
     });
-  });
-}
 
-const app = new Aqua();
+    app.get("/", (_req) => {
+      return "Aqua";
+    });
 
-// Configuring Elmedeno for Aqua
-const elmedeno = new Elmedeno("aqua");
 
-// Elmedeno Middleware for Aqua
-app.register(async (request, response) => {
-  response = await elmedeno.protect(request, response);
-  return response;
-});
+    Deno.test("Aqua header x-xss-protection test", async () => {
 
-app.get("/", (_req) => {
-  return "Aqua";
-});
+      const res = await sendMockRequest(
+        new Request("http://localhost/", {
+          method: "GET"
+        }),
+      );
 
-Deno.test("Aqua header x-xss-protection test", async () => {
+      assertEquals(res.headers.get("x-xss-protection"), "1; mode=block")
 
-  const res = await sendMockRequest(
-    new Request("http://localhost/", {
-      method: "GET"
-    }),
-  );
+      resolve(true)
 
-  assertEquals(res.headers.get("x-xss-protection"), "1; mode=block")
-
-});
-
+    });
+  })
+})()
 
 

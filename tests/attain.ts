@@ -2,27 +2,36 @@ import { App, Request, Response } from "https://deno.land/x/attain/mod.ts";
 import { superdeno } from "https://deno.land/x/superdeno/mod.ts";
 import { Elmedeno } from "../mod.ts";
 
-Deno.test("Attain header x-xss-protection test", () => {
-  const app = new App();
 
-  // Configuring Elmedeno for Attain
-  const elmedeno = new Elmedeno("attain");
+export default (() => {
+  return new Promise((resolve, reject) => {
 
-  // Elmedeno middleware for Attain
-  const elmedenoMiddleware = async (req: Request, res: Response) => {
-    res = await elmedeno.protect(req, res);
-  };
+    Deno.test("Attain header x-xss-protection test", () => {
+      const app = new App();
 
-  // Adding the middleware
-  app.use(elmedenoMiddleware, (_req, res) => {
-    res.status(200).send({ status: "Good" });
-  });
+      // Configuring Elmedeno for Attain
+      const elmedeno = new Elmedeno("attain");
 
-  app.listen(8000);
+      // Elmedeno middleware for Attain
+      const elmedenoMiddleware = async (req: Request, res: Response) => {
+        res = await elmedeno.protect(req, res);
+      };
 
-  superdeno("http://localhost:8000")
+      // Adding the middleware
+      app.use(elmedenoMiddleware, (_req, res) => {
+        res.status(200).send({ status: "Good" });
+      });
+
+      app.listen(8000);
+
+      superdeno("http://localhost:8000")
         .get("/")
         .expect("x-xss-protection", "1; mode=block")
 
-  app.close()
-});
+      app.close()
+
+      resolve(true)
+
+    });
+  })
+})()

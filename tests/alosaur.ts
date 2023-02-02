@@ -4,8 +4,6 @@ import { MiddlewareTarget } from 'https://deno.land/x/alosaur/src/models/middlew
 import { HttpContext } from "https://deno.land/x/alosaur/src/models/http-context.ts";
 import { Elmedeno } from "../mod.ts";
 import { superdeno } from "https://deno.land/x/superdeno/mod.ts";
-import { delay } from "https://deno.land/std@0.137.0/async/delay.ts";
-
 
 // Configuring Elmedeno for Alosaur
 const elmedeno = new Elmedeno("alosaur");
@@ -41,19 +39,26 @@ export class MainController {
 })
 export class MainArea { }
 
-Deno.test({name:"Alosaur header x-xss-protection test"}, () => {
-    // Create Alosaur application
-    const app = new App({
-        areas: [MainArea],
-        // Adding the Elmedeno Middleware to the application
-        middlewares: [ElmedenoMiddleware],
-    });
+export default (() => {
+    return new Promise((resolve, reject) => {
 
-    app.listen({ port: 8000 })
+        Deno.test({ name: "Alosaur header x-xss-protection test" }, () => {
+            // Create Alosaur application
+            const app = new App({
+                areas: [MainArea],
+                // Adding the Elmedeno Middleware to the application
+                middlewares: [ElmedenoMiddleware],
+            });
 
-    superdeno("http://localhost:8000")
-        .get("/")
-        .expect("x-xss-protection", "1; mode=block")
+            app.listen({ port: 8000 })
 
-    app.close()
-})
+            superdeno("http://localhost:8000")
+                .get("/")
+                .expect("x-xss-protection", "1; mode=block")
+
+            app.close()
+
+            resolve(true)
+        })
+    })
+})()
